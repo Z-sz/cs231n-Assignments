@@ -81,8 +81,8 @@ def softmax_loss_vectorized(W, X, y, reg):
   one_hot = np.zeros_like(y_hat)
   one_hot[range(N), y] = 1
   loss = -np.sum(np.log(y_hat[range(N), y])) / N + reg * np.sum(np.square(W)) / 2
-  da = y_hat - one_hot
-  dW = np.dot(X.T, da) / N + reg * W
+  da = (y_hat - one_hot) / N
+  dW = np.dot(X.T, da) + reg * W
   #############################################################################
   #                          END OF YOUR CODE                                 #
   #############################################################################
